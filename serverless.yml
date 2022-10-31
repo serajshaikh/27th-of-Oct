@@ -13,10 +13,10 @@ provider:
 
 plugins:
   - serverless-s3-sync
-custom:
-  s3Sync:
+custom: #we need to define a custom parameter
+  s3Sync: #list of bucket of file we want to sync
     - bucketName: myserverlessprojectuploadbuckt-321123
-      localDir: UploadData    
+      localDir: UploadData   #dir or folder on my computer that we want to upload. 
 
 
 
@@ -28,17 +28,47 @@ functions:
 
 
     events:
-      - http:
-            path: get-user/{ID} # to trigger the api whatever id user enter that will pass the path parameter.
-            method: GET
-            cors: true
+      - http: #api gateway http event
+            path: get-user/{ID} # to trigger the api whatever id user enter that will pass the path parameter.whatever id user enter it will pass through path parameter(url)
+            method: GET 
+            cors: true #allow us to hit the api from a webpage
 
 # #creating a s3 bucket
 # #https://stackoverflow.com/questions/41572237/how-can-we-use-serverless-yml-to-create-an-aws-s3-bucket-and-add-a-file-to-it
 
+# s3 bucket is a resource
 # resources:
 #   Resources:
 #     DemoBucketUpload:
 #       Type: AWS::S3::Bucket
 #       Properties:
 #         BucketName: myserverlessprojectuploadbuckt-321123
+          # bucket name should be completely unique
+
+
+
+
+
+
+
+# I have created a new aws project using serverless template and deploying a lambda function
+#   -> here i have use serverless template to create and setup a new serverless project.
+#   i configure serverless.yml file like I have added the profile and removed unnecessary code etc .
+
+# I have deploy s3 bucket using serverless and upload the text file using amazon s3 sync 
+#   first i have setup serverless instance on a serverless folder
+#   and then setup the configuration for serverless bucket.
+
+# I have created a api using aws lambda and api gateway and deploying them using serverless
+#   I have created a user data as a nested object. each user has unique id which reference and object that object contains set of information of user.
+#   whoever is making request need to pass id through url (path parameter) if the user id is correct then only I will display the details to that user otherwise I will not be proceeding 
+
+# I have started to learn "amazon iot core".
+# What I have learned today...
+# IoT and MQTT
+# I created a thing
+# using “node-red”  publish and subscribe message
+# and created a dynamoDB table where I stored all the messages coming in JSON format.
+# AWS IoT rules
+# Connected Lambda to API Gateway
+ 
